@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "@playwright-testing-library/test": "^4.5.0",
+    "@playwright/test": "^1.27.1",
+    "chai-postman": "^2.0.1",
+    "cypress": "^10.8.0",
+    "cypress-file-upload": "^5.0.8",
+    "cypress-xpath": "^2.0.1",
+    "playwright-expect": "^0.1.2"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "lodash": "^4.17.21",
+    "postman-collection": "^4.1.4",
+    "request": "^2.88.2"
+  },
+  "scripts": {}
+}
