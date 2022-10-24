@@ -66,35 +66,24 @@ test.describe("User Sign-up and Login", () => {
     const accountCreationModal = page.getByRole('heading', { name: 'Get Started with Real World App' });
     const menu = page.locator('xpath=//*[@id="root"]/div/div/div/div[2]');
     const userName = page.locator('[data-test="sidenav-username"]');
-    if (await accountCreationModal.isVisible()) {
-      await page.locator('[data-test="user-onboarding-next"]').click();
-      await page.getByPlaceholder('Bank Name').type('The Best Bank');
-      await page.getByPlaceholder('Routing Number').type('987654321');
-      await page.getByPlaceholder('Account Number').type('123456789');
-      await page.locator('[data-test="bankaccount-submit"]').click();
-      await page.locator('[data-test="user-onboarding-next"]').click();
+    
+    await expect.soft(accountCreationModal).toBeVisible();
+    await (page.locator('[data-test="user-onboarding-next"]').click());
+    await page.getByPlaceholder('Bank Name').type('The Best Bank');
+    await page.getByPlaceholder('Routing Number').type('987654321');
+    await page.getByPlaceholder('Account Number').type('123456789');
+    await page.locator('[data-test="bankaccount-submit"]').click();
+    await page.locator('[data-test="user-onboarding-next"]').click();
 
-      //Verify Login
-      await expect(menu).toHaveText('$0.00Account BalanceHomeMy AccountBank AccountsNotificationsLogout');
-      await expect(userName).toHaveText('@PainterJoy90');
+    //Verify Login
+    await expect(menu).toHaveText('$0.00Account BalanceHomeMy AccountBank AccountsNotificationsLogout');
+    await expect(userName).toHaveText('@PainterJoy90');
 
-      //Logout
-      const logoutButton = page.locator('[data-test="sidenav-signout"]');
-      await logoutButton.click();
+    //Logout
+    const logoutButton = page.locator('[data-test="sidenav-signout"]');
+    await logoutButton.click();
 
-      //Verify Logout
-      await expect(signIn).toHaveText('Sign in');
-    } else if(await menu.isVisible()){
-      //Verify Login
-      await expect(menu).toHaveText('$0.00Account BalanceHomeMy AccountBank AccountsNotificationsLogout');
-      await expect(userName).toHaveText('@PainterJoy90');
-
-      //Logout
-      const logoutButton = page.locator('[data-test="sidenav-signout"]');
-      await logoutButton.click();
-
-      //Verify Logout
-      await expect(signIn).toHaveText('Sign in');
-    }
+    //Verify Logout
+    await expect(signIn).toHaveText('Sign in');
   })
 });
