@@ -19,4 +19,13 @@ test.describe("navigation", () => {
     // Verify that the text is visible
     await expect(signIn).toHaveText('Sign in');
   });
+
+  test('should allow a visitor to sign-up, login, and logout', async ({ page }) => {
+    const userInfo = {
+      firstName: "Bob",
+      lastName: "Ross",
+      username: "PainterJoy90",
+      password: "s3cret",
+    };
+  })
 });
