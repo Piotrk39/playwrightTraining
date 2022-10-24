@@ -42,11 +42,20 @@ test.describe("User Sign-up and Login", () => {
     const signupPageTitle = page.locator('[data-test="signup-title"]');
     await expect (signupPageTitle).toHaveText('Sign Up');
 
-    //Fill in the form
+    //Fill in the form and sign up
     await page.getByLabel('First Name *').type(userInfo.firstName);
     await page.getByLabel('Last Name *').type(userInfo.lastName);
     await page.getByLabel('Username *').type(userInfo.username);
     await page.getByRole('textbox', { name: 'Password' }).type(userInfo.password);
     await page.getByLabel('Confirm Password *').type(userInfo.password);
+
+    //Sign Up
+    await page.locator('[data-test="signup-submit"]').click();
+    
+    //Confirm users redirection
+    const signIn = page.getByRole('heading', { name: 'Sign in' });
+    await expect(signIn).toHaveText('Sign in');
+
+    
   })
 });
