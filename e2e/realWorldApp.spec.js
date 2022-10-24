@@ -56,6 +56,11 @@ test.describe("User Sign-up and Login", () => {
     const signIn = page.getByRole('heading', { name: 'Sign in' });
     await expect(signIn).toHaveText('Sign in');
 
-    
+    //Login user
+    await page.getByLabel('Username').type(userInfo.username);
+    await page.getByLabel('Password').type(userInfo.password);
+    await page.getByLabel('Remember me').click();
+    await page.locator('[data-test="signin-submit"]').click();
+
   })
 });
