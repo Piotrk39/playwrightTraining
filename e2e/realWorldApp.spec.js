@@ -71,5 +71,8 @@ test.describe("User Sign-up and Login", () => {
     //Logout
     const logoutButton = page.locator('[data-test="sidenav-signout"]');
     await logoutButton.click();
+
+    //Verify Logout
+    await expect(signIn).toHaveText('Sign in');
   })
 });
