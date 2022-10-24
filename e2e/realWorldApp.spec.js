@@ -62,5 +62,14 @@ test.describe("User Sign-up and Login", () => {
     await page.getByLabel('Remember me').click();
     await page.locator('[data-test="signin-submit"]').click();
 
+    //Verify Login
+    const menu = page.locator('xpath=//*[@id="root"]/div/div/div/div[2]');
+    const userName = page.locator('[data-test="sidenav-username"]');
+    await expect(menu).toHaveText('$0.00Account BalanceHomeMy AccountBank AccountsNotificationsLogout');
+    await expect(userName).toHaveText('@PainterJoy90');
+
+    //Logout
+    const logoutButton = page.locator('[data-test="sidenav-signout"]');
+    await logoutButton.click();
   })
 });
