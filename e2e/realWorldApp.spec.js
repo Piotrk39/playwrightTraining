@@ -41,5 +41,12 @@ test.describe("User Sign-up and Login", () => {
     //Sign up page should be visible by title
     const signupPageTitle = page.locator('[data-test="signup-title"]');
     await expect (signupPageTitle).toHaveText('Sign Up');
+
+    //Fill in the form
+    await page.getByLabel('First Name *').type(userInfo.firstName);
+    await page.getByLabel('Last Name *').type(userInfo.lastName);
+    await page.getByLabel('Username *').type(userInfo.username);
+    await page.getByRole('textbox', { name: 'Password' }).type(userInfo.password);
+    await page.getByLabel('Confirm Password *').type(userInfo.password);
   })
 });
