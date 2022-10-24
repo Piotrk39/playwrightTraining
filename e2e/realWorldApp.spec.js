@@ -1,7 +1,7 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 
-test.describe("navigation", () => {
+test.describe("User Sign-up and Login", () => {
   test.beforeEach(async ({ page }) => {
     // Go to the starting url before each test.
     await page.goto("http://localhost:3000/signin");
@@ -27,5 +27,18 @@ test.describe("navigation", () => {
       username: "PainterJoy90",
       password: "s3cret",
     };
+
+    //signup button
+    const signupButton = page.locator('[data-test="signup"]');
+    await expect(signupButton).toHaveAttribute('href', '/signup');
+
+    await signupButton.click();
+    
+    //Error message visible for the second click to be initiated
+    const nameRequiredMsg = page.getByText('Username is required');
+    await expect (nameRequiredMsg).toHaveText('Username is required');
+
+    await signupButton.click();
+
   })
 });
