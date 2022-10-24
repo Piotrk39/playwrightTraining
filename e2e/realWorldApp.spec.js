@@ -31,14 +31,15 @@ test.describe("User Sign-up and Login", () => {
     //signup button
     const signupButton = page.locator('[data-test="signup"]');
     await expect(signupButton).toHaveAttribute('href', '/signup');
-
     await signupButton.click();
     
     //Error message visible for the second click to be initiated
     const nameRequiredMsg = page.getByText('Username is required');
     await expect (nameRequiredMsg).toHaveText('Username is required');
-
     await signupButton.click();
 
+    //Sign up page should be visible by title
+    const signupPageTitle = page.locator('[data-test="signup-title"]');
+    await expect (signupPageTitle).toHaveText('Sign Up');
   })
 });
