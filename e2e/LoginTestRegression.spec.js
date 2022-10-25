@@ -1,10 +1,12 @@
 // @ts-check
+const { sample } = require('../sampleData/sample');
 const { test, expect } = require('@playwright/test');
 
 test.describe("User Sign-up and Login", () => {
   test.beforeEach(async ({ page }) => {
     // Go to the starting url before each test.
-    await page.goto("http://localhost:3000/signin");
+    const data = new sample(page);
+    await data.navigate();
   });
 
   test("main navigation", async ({ page }) => {
@@ -21,12 +23,7 @@ test.describe("User Sign-up and Login", () => {
   });
 
   test('should allow a visitor to sign-up, login, and logout', async ({ page }) => {
-    const userInfo = {
-      firstName: "Bob",
-      lastName: "Ross",
-      username: "PainterJoy90",
-      password: "s3cret",
-    };
+    const data = new sample(page);
 
     //signup button
     const signupButton = page.locator('[data-test="signup"]');
@@ -43,37 +40,22 @@ test.describe("User Sign-up and Login", () => {
     await expect (signupPageTitle).toHaveText('Sign Up');
 
     //Fill in the form and sign up
-    await page.getByLabel('First Name *').type(userInfo.firstName);
-    await page.getByLabel('Last Name *').type(userInfo.lastName);
-    await page.getByLabel('Username *').type(userInfo.username);
-    await page.getByRole('textbox', { name: 'Password' }).type(userInfo.password);
-    await page.getByLabel('Confirm Password *').type(userInfo.password);
-
-    //Sign Up
-    await page.locator('[data-test="signup-submit"]').click();
+    data.signUp();
     
     //Confirm users redirection
     const signIn = page.getByRole('heading', { name: 'Sign in' });
     await expect(signIn).toHaveText('Sign in');
 
     //Login user
-    await page.getByLabel('Username').type(userInfo.username);
-    await page.getByLabel('Password').type(userInfo.password);
-    await page.getByLabel('Remember me').click();
-    await page.locator('[data-test="signin-submit"]').click();
+    data.logIn();
 
     //In case account creation modal pops up
     const accountCreationModal = page.getByRole('heading', { name: 'Get Started with Real World App' });
     const menu = page.locator('xpath=//*[@id="root"]/div/div/div/div[2]');
     const userName = page.locator('[data-test="sidenav-username"]');
     
-    await expect.soft(accountCreationModal).toBeVisible();
-    await (page.locator('[data-test="user-onboarding-next"]').click());
-    await page.getByPlaceholder('Bank Name').type('The Best Bank');
-    await page.getByPlaceholder('Routing Number').type('987654321');
-    await page.getByPlaceholder('Account Number').type('123456789');
-    await page.locator('[data-test="bankaccount-submit"]').click();
-    await page.locator('[data-test="user-onboarding-next"]').click();
+    await expect(accountCreationModal).toBeVisible();
+    await data.formFillIn()
 
     //Verify Login
     await expect(menu).toHaveText('$0.00Account BalanceHomeMy AccountBank AccountsNotificationsLogout');
@@ -85,5 +67,5 @@ test.describe("User Sign-up and Login", () => {
 
     //Verify Logout
     await expect(signIn).toHaveText('Sign in');
-  })
+  });
 });
