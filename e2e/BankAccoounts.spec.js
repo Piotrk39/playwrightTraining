@@ -21,7 +21,11 @@ test.describe("User creates new bank account and deletes it", () => {
 
   test("should display bank account form errors", async ({ page }) => {
       const data = new sample(page);
+      const bank = new sampleBank(page);
       
+      await data.logIn();
+      await bank.redirectToNewBankForm();
+      await bank.triggerErrors();
   });  
 
   test("soft deletes a bank account", async ({ page }) => {

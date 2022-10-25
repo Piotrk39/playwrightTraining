@@ -5,6 +5,9 @@ const bankAccountInfo = {
     bankName: "Bobs Bank",
     routingNumber: "987654321",
     accountNumber: "123456789",
+    WrongbankName: "Bo",
+    WrongroutingNumber: "54321",
+    WrongaccountNumber: "123456",
 };
 
 export default class sampleBank {
@@ -44,5 +47,13 @@ export default class sampleBank {
 
     async deleteAccount() {
       await this.deleteButton.click();
+    }
+
+    async triggerErrors() {
+      await this.createNewBankAccout.click();
+      await expect(this.newBanksFormName).toHaveText('Create Bank Account');
+      await this.bankNameField.type(bankAccountInfo.WrongbankName);
+      await this.accountNumberField.type(bankAccountInfo.WrongaccountNumber);
+      await this.routingNumberField.type(bankAccountInfo.WrongroutingNumber);
     }
 }
