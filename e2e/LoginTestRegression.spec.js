@@ -1,5 +1,5 @@
 // @ts-check
-const { sample } = require('../sampleData/sample');
+import sample from '../sampleData/loginLogoutData';
 const { test, expect } = require('@playwright/test');
 
 test.describe("User Sign-up and Login", () => {
@@ -26,46 +26,37 @@ test.describe("User Sign-up and Login", () => {
     const data = new sample(page);
 
     //signup button
-    const signupButton = page.locator('[data-test="signup"]');
-    await expect(signupButton).toHaveAttribute('href', '/signup');
-    await signupButton.click();
+    await expect(data.signupButton).toHaveAttribute('href', '/signup');
+    await data.signupButton.click();
     
     //Error message visible for the second click to be initiated
-    const nameRequiredMsg = page.getByText('Username is required');
-    await expect (nameRequiredMsg).toHaveText('Username is required');
-    await signupButton.click();
+    await expect.soft(data.nameRequiredMsg).toHaveText('Username is required');
+    await data.signupButton.click();
 
     //Sign up page should be visible by title
-    const signupPageTitle = page.locator('[data-test="signup-title"]');
-    await expect (signupPageTitle).toHaveText('Sign Up');
+    await expect(data.signupPageTitle).toHaveText('Sign Up');
 
     //Fill in the form and sign up
     data.signUp();
     
     //Confirm users redirection
-    const signIn = page.getByRole('heading', { name: 'Sign in' });
-    await expect(signIn).toHaveText('Sign in');
+    await expect(data.signIn).toHaveText('Sign in');
 
     //Login user
     data.logIn();
 
     //In case account creation modal pops up
-    const accountCreationModal = page.getByRole('heading', { name: 'Get Started with Real World App' });
-    const menu = page.locator('xpath=//*[@id="root"]/div/div/div/div[2]');
-    const userName = page.locator('[data-test="sidenav-username"]');
-    
-    await expect(accountCreationModal).toBeVisible();
-    await data.formFillIn()
+    await expect(data.accountCreationModal).toBeVisible();
+    await data.formFillIn();
 
     //Verify Login
-    await expect(menu).toHaveText('$0.00Account BalanceHomeMy AccountBank AccountsNotificationsLogout');
-    await expect(userName).toHaveText('@PainterJoy90');
+    await expect(data.menu).toHaveText('$0.00Account BalanceHomeMy AccountBank AccountsNotificationsLogout');
+    await expect(data.userName).toHaveText('@PainterJoy90');
 
     //Logout
-    const logoutButton = page.locator('[data-test="sidenav-signout"]');
-    await logoutButton.click();
+    await data.logoutButton.click();
 
     //Verify Logout
-    await expect(signIn).toHaveText('Sign in');
+    await expect(data.signIn).toHaveText('Sign in');
   });
 });
