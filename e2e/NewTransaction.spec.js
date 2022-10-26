@@ -39,12 +39,18 @@ test.describe("User Sign-up and Login", () => {
 
         await data.logIn();
         await transaction.navigateNewTransaction();
-        await transaction.createNewPayTransaction();
+        await transaction.createNewRequestTransaction();
     });
 
     test("displays new transaction errors", async ({ page }) => {
         // Assertions use the expect API.
+        const data = new sample(page);
+        const transaction = new sampleTransaction(page);
         await expect(page).toHaveURL("http://localhost:3000/signin");
+
+        await data.logIn();
+        await transaction.navigateNewTransaction();
+        await transaction.triggerTransactionErrors();
     });
 
     test("submits a transaction payment and verifies the deposit for the receiver", async ({ page }) => {
