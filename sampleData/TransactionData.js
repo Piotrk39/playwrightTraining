@@ -1,6 +1,5 @@
 const { expect } = require('@playwright/test');
 import sample from './loginLogoutData';
-import sampleBank from './BankAccountData';
 
 const transactionInfo = {
     amountPay: "35",
@@ -72,8 +71,6 @@ export default class sampleTransaction {
         await this.request.click();
         await expect(this.confirmation).toHaveText('Requested $120.00 for Sushi was great payback is better')
         await this.returnToTransactions.click();
-        // await this.myTransactions.click();
-        // await expect(this.transactionReq).toHaveText('Bob Ross requested Devon BeckerSushi was great payback is better00+$120.00');
       }
 
     async requestVerification() {

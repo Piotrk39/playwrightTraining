@@ -2,7 +2,7 @@ import sample from '../sampleData/loginLogoutData';
 import sampleTransaction from '../sampleData/TransactionData';
 const { test, expect } = require('@playwright/test');
 
-test.describe("User Sign-up and Login", () => {
+test.describe("Transaction workflow test", () => {
   test.beforeEach(async ({ page }) => {
     // Go to the starting url before each test.
     const data = new sample(page);
