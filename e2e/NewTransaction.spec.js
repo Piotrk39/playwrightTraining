@@ -29,6 +29,7 @@ test.describe("User Sign-up and Login", () => {
         await data.logIn();
         await transaction.navigateNewTransaction();
         await transaction.createNewPayTransaction();
+        await transaction.paymentVerification();
     });
 
     test("navigates to the new transaction form, selects a user and submits a transaction request", async ({ page }) => {
@@ -40,6 +41,7 @@ test.describe("User Sign-up and Login", () => {
         await data.logIn();
         await transaction.navigateNewTransaction();
         await transaction.createNewRequestTransaction();
+        await transaction.requestVerification();
     });
 
     test("displays new transaction errors", async ({ page }) => {
@@ -55,12 +57,22 @@ test.describe("User Sign-up and Login", () => {
 
     test("submits a transaction payment and verifies the deposit for the receiver", async ({ page }) => {
         // Assertions use the expect API.
+        const data = new sample(page);
+        const transaction = new sampleTransaction(page);
         await expect(page).toHaveURL("http://localhost:3000/signin");
+
+        await data.logIn();
+        await transaction.paymentVerification();
     });
 
     test("submits a transaction request and accepts the request for the receiver", async ({ page }) => {
         // Assertions use the expect API.
+        const data = new sample(page);
+        const transaction = new sampleTransaction(page);
         await expect(page).toHaveURL("http://localhost:3000/signin");
+
+        await data.logIn();
+        await transaction.requestVerification();
     });
 });
 

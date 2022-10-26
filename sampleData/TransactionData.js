@@ -48,16 +48,19 @@ export default class sampleTransaction {
     }
 
     async createNewPayTransaction() {
-      await this.searchRecipientInput.type(transactionInfo.searchPartialPay);
-      await expect(this.kaylin).toHaveText('Kaylin Homenick');
-      await this.kaylin.click();
-      await this.amount.type(transactionInfo.amountPay);
-      await this.note.type(transactionInfo.notePay);
-      await this.pay.click();
-      await expect(this.confirmation).toHaveText('Paid $35.00 for I pay you pay we all pay')
-      await this.returnToTransactions.click();
-      await this.myTransactions.click();
-      await expect(this.transactionPaid).toHaveText('Bob Ross paid Kaylin HomenickI pay you pay we all pay00-$35.00');
+        await this.searchRecipientInput.type(transactionInfo.searchPartialPay);
+        await expect(this.kaylin).toHaveText('Kaylin Homenick');
+        await this.kaylin.click();
+        await this.amount.type(transactionInfo.amountPay);
+        await this.note.type(transactionInfo.notePay);
+        await this.pay.click();
+        await expect(this.confirmation).toHaveText('Paid $35.00 for I pay you pay we all pay')
+        await this.returnToTransactions.click();
+    }
+
+    async paymentVerification() {
+        await this.myTransactions.click();
+        await expect(this.transactionPaid).toHaveText('Bob Ross paid Kaylin HomenickI pay you pay we all pay00-$35.00');
     }
 
     async createNewRequestTransaction() {
@@ -69,9 +72,14 @@ export default class sampleTransaction {
         await this.request.click();
         await expect(this.confirmation).toHaveText('Requested $120.00 for Sushi was great payback is better')
         await this.returnToTransactions.click();
+        // await this.myTransactions.click();
+        // await expect(this.transactionReq).toHaveText('Bob Ross requested Devon BeckerSushi was great payback is better00+$120.00');
+      }
+
+    async requestVerification() {
         await this.myTransactions.click();
         await expect(this.transactionReq).toHaveText('Bob Ross requested Devon BeckerSushi was great payback is better00+$120.00');
-      }
+    }
 
     async triggerTransactionErrors() {
         await this.searchRecipientInput.type(transactionInfo.searchPartialReq);
