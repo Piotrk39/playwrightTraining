@@ -10,7 +10,7 @@ test.describe("Transaction View options", () => {
     await data.navigate();
   });
 
-    test("transactions navigation tabs are hidden on a transaction view page", async ({ page }) => {
+    test("transactions navigation tabs are visible on a transaction view page", async ({ page }) => {
         // Assertions use the expect API.
         const data = new sample(page);
         const transaction = new sampleTransaction(page);
@@ -20,5 +20,18 @@ test.describe("Transaction View options", () => {
         await data.logIn();
         await transaction.paymentVerification();
         await options.paymentTransactionOptions();
+    });
+
+    test("transaction options: like and comment", async ({ page }) => {
+        // Assertions use the expect API.
+        const data = new sample(page);
+        const transaction = new sampleTransaction(page);
+        const options = new sampleOptions(page);
+        await expect(page).toHaveURL("http://localhost:3000/signin");
+    
+        await data.logIn();
+        await transaction.paymentVerification();
+        await options.paymentTransactionOptions();
+        await options.likeAndCommentPayment();
     });
 });
