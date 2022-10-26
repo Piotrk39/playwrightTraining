@@ -26,8 +26,9 @@ export default class sampleBank {
       this.createNewBankAccout = page.locator('[data-test="bankaccount-new"]');
       this.formBankName = page.getByPlaceholder('Bank Name');
       this.newBanksFormName = page.getByRole('heading', { name: 'Create Bank Account' });
-      this.newAccount = page.getByText('Bobs Bank Delete');
+      this.newAccount = page.getByText('Bobs Bank Delete').last();
       this.deleteButton = page.locator('text=Delete >> nth=-1');
+      this.deletedAccount = page.getByText('Bobs Bank (Deleted)').last();
       //New Bank Account form Errors
       this.nameError = page.getByText('Must contain at least 5 characters');
       this.accountnumberError = page.getByText('Must contain at least 9 digits');
@@ -51,6 +52,7 @@ export default class sampleBank {
 
     async deleteAccount() {
       await this.deleteButton.click();
+      await expect(this.deletedAccount).toHaveText('Bobs Bank (Deleted)');
     }
 
     async triggerErrors() {
