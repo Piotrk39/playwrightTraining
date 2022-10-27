@@ -41,6 +41,7 @@ export default class sample {
 
     async navigate() {
       await this.page.goto('http://localhost:3000/signin');
+      await expect(this.page).toHaveURL("http://localhost:3000/signin");
     }
   
     async formFillIn() {

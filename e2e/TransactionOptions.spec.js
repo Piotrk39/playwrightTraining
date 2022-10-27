@@ -15,7 +15,6 @@ test.describe("Transaction View options", () => {
         const data = new sample(page);
         const transaction = new sampleTransaction(page);
         const options = new sampleOptions(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
     
         await data.logIn();
         await transaction.paymentVerification();
@@ -27,7 +26,6 @@ test.describe("Transaction View options", () => {
         const data = new sample(page);
         const transaction = new sampleTransaction(page);
         const options = new sampleOptions(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
     
         await data.logIn();
         await transaction.paymentVerification();
@@ -40,7 +38,6 @@ test.describe("Transaction View options", () => {
         const data = new sample(page);
         const transaction = new sampleTransaction(page);
         const options = new sampleOptions(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
     
         await data.logIn();
         await transaction.requestVerification();

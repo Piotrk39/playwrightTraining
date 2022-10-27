@@ -13,7 +13,6 @@ test.describe("Transaction workflow test", () => {
         // Assertions use the expect API.
         const data = new sample(page);
         const transaction = new sampleTransaction(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
 
         await data.logIn();
         await transaction.navigateNewTransaction();
@@ -24,7 +23,6 @@ test.describe("Transaction workflow test", () => {
         // Assertions use the expect API.
         const data = new sample(page);
         const transaction = new sampleTransaction(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
 
         await data.logIn();
         await transaction.navigateNewTransaction();
@@ -36,7 +34,6 @@ test.describe("Transaction workflow test", () => {
         // Assertions use the expect API.
         const data = new sample(page);
         const transaction = new sampleTransaction(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
 
         await data.logIn();
         await transaction.navigateNewTransaction();
@@ -48,7 +45,6 @@ test.describe("Transaction workflow test", () => {
         // Assertions use the expect API.
         const data = new sample(page);
         const transaction = new sampleTransaction(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
 
         await data.logIn();
         await transaction.navigateNewTransaction();
@@ -59,7 +55,6 @@ test.describe("Transaction workflow test", () => {
         // Assertions use the expect API.
         const data = new sample(page);
         const transaction = new sampleTransaction(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
 
         await data.logIn();
         await transaction.paymentVerification();
@@ -69,7 +64,6 @@ test.describe("Transaction workflow test", () => {
         // Assertions use the expect API.
         const data = new sample(page);
         const transaction = new sampleTransaction(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
 
         await data.logIn();
         await transaction.requestVerification();

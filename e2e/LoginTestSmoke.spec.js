@@ -9,11 +9,6 @@ test.describe("User Sign-up and Login", () => {
     await data.navigate();
   });
 
-  test("main navigation", async ({ page }) => {
-    // Assertions use the expect API.
-    await expect(page).toHaveURL("http://localhost:3000/signin");
-  });
-
   test('should redirect unauthenticated user to signin page', async ({ page }) => {
     const data = new sample(page);
 

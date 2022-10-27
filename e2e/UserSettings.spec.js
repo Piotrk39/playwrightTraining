@@ -13,7 +13,6 @@ test.describe("User Settings", () => {
         // Assertions use the expect API.
         const data = new sample(page);
         const user = new sampleUserData(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
     
         await data.logIn();
         await user.navigateUserSetings();
@@ -23,7 +22,6 @@ test.describe("User Settings", () => {
         // Assertions use the expect API.
         const data = new sample(page);
         const user = new sampleUserData(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
     
         await data.logIn();
         await user.navigateUserSetings();
@@ -38,7 +36,6 @@ test.describe("User Settings", () => {
         // Assertions use the expect API.
         const data = new sample(page);
         const user = new sampleUserData(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
     
         await data.logIn();
         await user.navigateUserSetings();
@@ -53,7 +50,6 @@ test.describe("User Settings", () => {
         // Assertions use the expect API.
         const data = new sample(page);
         const user = new sampleUserData(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
     
         await data.logIn();
         await user.navigateUserSetings();
