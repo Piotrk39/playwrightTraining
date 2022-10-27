@@ -22,7 +22,7 @@ test.describe("Transaction View options", () => {
         await options.paymentTransactionOptions();
     });
 
-    test("transaction options: like and comment", async ({ page }) => {
+    test("transaction options: like and comment Payment", async ({ page }) => {
         // Assertions use the expect API.
         const data = new sample(page);
         const transaction = new sampleTransaction(page);
@@ -32,6 +32,19 @@ test.describe("Transaction View options", () => {
         await data.logIn();
         await transaction.paymentVerification();
         await options.paymentTransactionOptions();
+        await options.likeAndCommentPayment();
+    });
+
+    test("transaction options: like and comment Request", async ({ page }) => {
+        // Assertions use the expect API.
+        const data = new sample(page);
+        const transaction = new sampleTransaction(page);
+        const options = new sampleOptions(page);
+        await expect(page).toHaveURL("http://localhost:3000/signin");
+    
+        await data.logIn();
+        await transaction.requestVerification();
+        await options.RequestTransactionOptions();
         await options.likeAndCommentPayment();
     });
 });
