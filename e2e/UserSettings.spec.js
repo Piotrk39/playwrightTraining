@@ -19,17 +19,6 @@ test.describe("User Settings", () => {
         await user.navigateUserSetings();
     });
 
-    test("should display user setting form errors", async ({ page }) => {
-        // Assertions use the expect API.
-        const data = new sample(page);
-        const user = new sampleUserData(page);
-        await expect(page).toHaveURL("http://localhost:3000/signin");
-    
-        await data.logIn();
-        await user.navigateUserSetings();
-        await user.forceErrors();
-    });
-
     test("updates first name, last name, email and phone number", async ({ page }) => {
         // Assertions use the expect API.
         const data = new sample(page);
@@ -59,4 +48,15 @@ test.describe("User Settings", () => {
         await user.navigateUserSetings();
         await user.veryfiUpdateAgain();
     })
+
+    test("should display user setting form errors", async ({ page }) => {
+        // Assertions use the expect API.
+        const data = new sample(page);
+        const user = new sampleUserData(page);
+        await expect(page).toHaveURL("http://localhost:3000/signin");
+    
+        await data.logIn();
+        await user.navigateUserSetings();
+        await user.forceErrors();
+    });
 });
